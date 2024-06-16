@@ -16,3 +16,5 @@ __pycache__
 *.bak
 # Output of the linkchecker tool
 linkchecker-out.csv
+
+*.o

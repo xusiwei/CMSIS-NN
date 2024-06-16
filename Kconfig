@@ -2,7 +2,7 @@ menu "CMSIS-NN submodule config"
 
 menuconfig PKG_USING_CMSIS_NN
     bool "Enable CMSIS-NN pacakge"
-    default n
+    default y
 
 if PKG_USING_CMSIS_NN
     config CMSIS_NN_ACTIVATION
@@ -45,5 +45,9 @@ if PKG_USING_CMSIS_NN
         bool "SVDF functions"
         default y
 endif
+
+menuconfig PKG_USING_CMSIS_NN_TESTS
+    bool "Enable CMSIS-NN Unit Tests"
+    default n
 
 endmenu

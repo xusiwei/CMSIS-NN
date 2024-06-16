@@ -3,10 +3,19 @@ from building import *
 
 objs = []
 cwd  = GetCurrentDir()
-list = os.listdir(cwd)
 
-for item in list:
-    if os.path.isfile(os.path.join(cwd, item, 'SConscript')):
-        objs = objs + SConscript(os.path.join(item, 'SConscript'))
+# 编译 unity 库核心代码
+SOURCES = [ 'Unity/src/unity.c' ]
+CPPPATH = [cwd + '/Unity/src']
+objs += DefineGroup('Unity', SOURCES, depend = [''], CPPPATH = CPPPATH)
+
+# 包含测试用例子目录的 SConscript
+cases_dir = cwd + '/TestCases'
+dir_ents = os.listdir(cases_dir)
+for item in dir_ents:
+    sconsfile = os.path.join(cases_dir, item, 'SConscript')
+    # print(f'checking {sconsfile} ...')
+    if os.path.isfile(sconsfile):
+        objs += SConscript(sconsfile)
 
 Return('objs')
